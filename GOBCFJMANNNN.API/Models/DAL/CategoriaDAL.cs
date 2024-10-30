@@ -3,32 +3,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GOBCFJMANNNN.API.Models.DAL
 {
-    public class LibroDAL
+    public class CategoriaDAL
     {
-        readonly LibroBDContext _context;
+        readonly CategoriaBDContext _context;
 
         //Constructor que interactua con base de datos
-        public LibroDAL(LibroBDContext libroBDContext)
+        public CategoriaDAL(CategoriaBDContext libroBDContext)
         {
             _context = libroBDContext;
         }
 
         //Task:Crear
-        public async Task<int> Create(Libro libro)
+        public async Task<int> Create(Categoria libro)
         {
             _context.Add(libro);
             return await _context.SaveChangesAsync();
         }
 
         //Task: Obtener por Id
-        public async Task<Libro> GetById(int id)
+        public async Task<Categoria> GetById(int id)
         {
             var libro = await _context.Libros.FirstOrDefaultAsync(x => x.Id == id);
-            return libro != null ? libro : new Libro();
+            return libro != null ? libro : new Categoria();
         }
 
         //Task: Editar
-        public async Task<int> Edit(Libro libro)
+        public async Task<int> Edit(Categoria libro)
         {
             int result = 0;
             var autoUpdate = await GetById(libro.Id);
@@ -54,7 +54,7 @@ namespace GOBCFJMANNNN.API.Models.DAL
         }
 
         //Busqueda con filtro
-        private IQueryable<Libro> Query(Libro libro)
+        private IQueryable<Categoria> Query(Categoria libro)
         {
             var query = _context.Libros.AsQueryable();
             if (!string.IsNullOrWhiteSpace(libro.NombreLibro))
@@ -63,13 +63,13 @@ namespace GOBCFJMANNNN.API.Models.DAL
         }
 
         //Contador 
-        public async Task<int> CountSearch(Libro libro)
+        public async Task<int> CountSearch(Categoria libro)
         {
             return await Query(libro).CountAsync();
         }
 
         //Paginacion
-        public async Task<List<Libro>> Search(Libro libro, int take = 10, int skip = 0)
+        public async Task<List<Categoria>> Search(Categoria libro, int take = 10, int skip = 0)
         {
             take = take == 0 ? 10 : take;
             var query = Query(libro);

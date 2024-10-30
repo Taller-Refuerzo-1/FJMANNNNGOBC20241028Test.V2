@@ -5,13 +5,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace GOBCFJMANNNN.API.Models.DAL
 {
-    public class LibroBDContext : DbContext
+    public class CategoriaBDContext : DbContext
     {
-        public LibroBDContext(DbContextOptions<LibroBDContext> options): base(options)
+        public CategoriaBDContext(DbContextOptions<CategoriaBDContext> options): base(options)
         {
             
         }
 
-        public DbSet<Libro> Libros { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
     }
 }

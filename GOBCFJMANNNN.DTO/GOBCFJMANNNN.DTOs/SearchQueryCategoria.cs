@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GOBCFJMANNNN.DTO.GOBCFJMANNNN.DTOs
 {
-    public class SearchQueryLibro
+    public class SearchQueryCategoria
     {
-        [Display(Name = " Nombre")]
-        public string? NombreLibro_Like { get; set; }
+        [Display(Name = "Nombre")]
+        public string? Nombre_Like { get; set; }
     }
 }
