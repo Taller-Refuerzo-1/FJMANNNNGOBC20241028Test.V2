@@ -23,7 +23,7 @@ namespace GOBCFJMANNNN.API.Models.DAL
         //Task: Obtener por Id
         public async Task<Categoria> GetById(int id)
         {
-            var libro = await _context.Libros.FirstOrDefaultAsync(x => x.Id == id);
+            var libro = await _context.Categorias.FirstOrDefaultAsync(x => x.Id == id);
             return libro != null ? libro : new Categoria();
         }
 
@@ -34,7 +34,7 @@ namespace GOBCFJMANNNN.API.Models.DAL
             var autoUpdate = await GetById(libro.Id);
             if (autoUpdate.Id != 0)
             {
-                autoUpdate.NombreLibro = libro.NombreLibro;
+                autoUpdate.Nombre = libro.Nombre;
                 result = await _context.SaveChangesAsync();
             }
             return result;
@@ -47,7 +47,7 @@ namespace GOBCFJMANNNN.API.Models.DAL
             var libroDelete = await GetById(id);
             if (libroDelete.Id > 0)
             {
-                _context.Libros.Remove(libroDelete);
+                _context.Categorias.Remove(libroDelete);
                 result = await _context.SaveChangesAsync();
             }
             return result;
@@ -56,9 +56,9 @@ namespace GOBCFJMANNNN.API.Models.DAL
         //Busqueda con filtro
         private IQueryable<Categoria> Query(Categoria libro)
         {
-            var query = _context.Libros.AsQueryable();
-            if (!string.IsNullOrWhiteSpace(libro.NombreLibro))
-                query = query.Where(s => s.NombreLibro == libro.NombreLibro);
+            var query = _context.Categorias.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(libro.Nombre))
+                query = query.Where(s => s.Nombre == libro.Nombre);
             return query;
         }
 

@@ -57,7 +57,7 @@ namespace GOBCFJMANNNN.API.Endpoints
                 var libroResult = new GetIdResultCategoriaDTO
                 {
                     Id = libro.Id,
-                    NombreLibro = libro.NombreLibro
+                    Nombre = libro.Nombre
                 };
 
                 if (libroResult.Id > 0)
@@ -67,11 +67,11 @@ namespace GOBCFJMANNNN.API.Endpoints
             });
 
             //POST: Crear 
-            app.MapPost("/categoria", async (CreateAutoDTO autoDTO, AutosDAL autosDAL) =>
+            app.MapPost("/categoria", async (CreateCategoriaDTO autoDTO, CategoriaDAL autosDAL) =>
             {
-                var autos = new Auto
+                var autos = new Categoria
                 {
-                    Marca = autoDTO.Marca
+                    Nombre = autoDTO.Nombre
                 };
 
                 int result = await autosDAL.Create(autos);
@@ -82,15 +82,12 @@ namespace GOBCFJMANNNN.API.Endpoints
             });
 
             //PUT: Editar
-            app.MapPut("/categoria", async (EditAutoDTO autoDTO, AutosDAL autosDAL) =>
+            app.MapPut("/categoria", async (EditCategoriaDTO autoDTO, CategoriaDAL autosDAL) =>
             {
-                var autos = new Auto
+                var autos = new Categoria
                 {
                     Id = autoDTO.Id,
-                    Marca = autoDTO.Marca,
-                    Modelo = autoDTO.Modelo,
-                    Year = autoDTO.Year,
-                    Precio = autoDTO.Precio
+                    Nombre = autoDTO.Nombre
                 };
 
                 int result = await autosDAL.Edit(autos);
@@ -111,5 +108,4 @@ namespace GOBCFJMANNNN.API.Endpoints
             });
         }
     }
-}
 }
